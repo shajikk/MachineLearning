@@ -8,6 +8,6 @@ Right answers given
 # Unsupervised learning
 
 * No specific classification possible. 
-  Google News
-  Gene pool classification
+  > Google News
+  > Gene pool classification
 
