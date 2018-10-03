@@ -95,6 +95,9 @@ J = ((1/m) * sum(s1));
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
+
+
+
 %
 % Part 3: Implement regularization with the cost function and gradients.
 %
@@ -104,7 +107,13 @@ J = ((1/m) * sum(s1));
 %               and Theta2_grad from Part 2.
 %
 
+Theta1_r = Theta1;
+Theta2_r = Theta2;
 
+Theta1_r(:,1) = 0;
+Theta2_r(:,1) = 0;
+
+ J = J + (lambda * (sum(sum(Theta1_r .^ 2)) + sum(sum(Theta2_r .^ 2)))/(2*m));
 
 
 
