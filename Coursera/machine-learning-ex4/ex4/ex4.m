@@ -35,14 +35,14 @@ fprintf('Loading and Visualizing Data ...\n')
 load('ex4data1.mat');
 m = size(X, 1);
 
-% Randomly select 100 data points to display
-sel = randperm(size(X, 1));
-sel = sel(1:100);
+% % Randomly select 100 data points to display
+% sel = randperm(size(X, 1));
+% sel = sel(1:100);
 
-displayData(X(sel, :));
+% displayData(X(sel, :));
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+% fprintf('Program paused. Press enter to continue.\n');
+% pause;
 
 
 %% ================ Part 2: Loading Parameters ================
@@ -55,7 +55,11 @@ fprintf('\nLoading Saved Neural Network Parameters ...\n')
 load('ex4weights.mat');
 
 % Unroll parameters 
+% size(Theta1) -> 25 x 401
+% size(Theta2)   -> 10 x 26
+
 nn_params = [Theta1(:) ; Theta2(:)];
+% size(nn_params) -> 10285 x 1;
 
 %% ================ Part 3: Compute Cost (Feedforward) ================
 %  To the neural network, you should first start by implementing the
@@ -80,8 +84,9 @@ J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
 fprintf(['Cost at parameters (loaded from ex4weights): %f '...
          '\n(this value should be about 0.287629)\n'], J);
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
 
 %% =============== Part 4: Implement Regularization ===============
 %  Once your cost function implementation is correct, you should now
@@ -99,8 +104,8 @@ J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
 fprintf(['Cost at parameters (loaded from ex4weights): %f '...
          '\n(this value should be about 0.383770)\n'], J);
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+% fprintf('Program paused. Press enter to continue.\n');
+% pause;
 
 
 %% ================ Part 5: Sigmoid Gradient  ================
@@ -116,8 +121,10 @@ fprintf('Sigmoid gradient evaluated at [-1 -0.5 0 0.5 1]:\n  ');
 fprintf('%f ', g);
 fprintf('\n\n');
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+
+
+% fprintf('Program paused. Press enter to continue.\n');
+% pause;
 
 
 %% ================ Part 6: Initializing Pameters ================
@@ -135,6 +142,7 @@ initial_Theta2 = randInitializeWeights(hidden_layer_size, num_labels);
 initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
 
 
+
 %% =============== Part 7: Implement Backpropagation ===============
 %  Once your cost matches up with ours, you should proceed to implement the
 %  backpropagation algorithm for the neural network. You should add to the
@@ -146,8 +154,9 @@ fprintf('\nChecking Backpropagation... \n');
 %  Check gradients by running checkNNGradients
 checkNNGradients;
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
 
 
 %% =============== Part 8: Implement Regularization ===============
@@ -168,8 +177,10 @@ debug_J  = nnCostFunction(nn_params, input_layer_size, ...
 fprintf(['\n\nCost at (fixed) debugging parameters (w/ lambda = %f): %f ' ...
          '\n(for lambda = 3, this value should be about 0.576051)\n\n'], lambda, debug_J);
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+
+
+% fprintf('Program paused. Press enter to continue.\n');
+% pause;
 
 
 %% =================== Part 8: Training NN ===================
@@ -205,8 +216,8 @@ Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
 Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
                  num_labels, (hidden_layer_size + 1));
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+% fprintf('Program paused. Press enter to continue.\n');
+% pause;
 
 
 %% ================= Part 9: Visualize Weights =================
@@ -218,8 +229,9 @@ fprintf('\nVisualizing Neural Network... \n')
 
 displayData(Theta1(:, 2:end));
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
+
 
 %% ================= Part 10: Implement Predict =================
 %  After training the neural network, we would like to use it to predict
@@ -230,5 +242,5 @@ pause;
 pred = predict(Theta1, Theta2, X);
 
 fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
-
+return
 

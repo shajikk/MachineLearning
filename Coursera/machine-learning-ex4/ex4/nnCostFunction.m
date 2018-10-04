@@ -113,7 +113,7 @@ J = ((1/m) * sum(s1));
    t(1,:) = []; % remove the row 1, corresponding to bias term.
    % size(t) % 25 x 5000
 
-   d2 =  t .*  sigmoidGradient(z2);
+   d2 =  t .*  sigmoidGradient(z2); % not a2 !!!!
 
 
    % size(d3) % 10 x 5000
@@ -126,8 +126,8 @@ J = ((1/m) * sum(s1));
    % D1
    D1 =  d2 * X;
    % size(D1) % 25 x 401
-   Theta1_grad = D1/m;
-   Theta2_grad = D2/m;
+   % Theta1_grad = D1/m;
+   % Theta2_grad = D2/m;
 
 
 % size(Theta1) % -> 25 x 401
@@ -149,6 +149,9 @@ Theta1_r(:,1) = 0;
 Theta2_r(:,1) = 0;
 
  J = J + (lambda * (sum(sum(Theta1_r .^ 2)) + sum(sum(Theta2_r .^ 2)))/(2*m));
+
+Theta1_grad = D1/m + (lambda/m) * Theta1_r;
+Theta2_grad = D2/m + (lambda/m) * Theta2_r;
 
 
 
