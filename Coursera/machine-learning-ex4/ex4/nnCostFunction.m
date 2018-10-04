@@ -43,21 +43,27 @@ Theta2_grad = zeros(size(Theta2));
 % size(Theta1) % -> 25 x 401
 % size(Theta2) %  -> 10 x 26
 % size(X) % -> 5000 x 401
+X_orig = X;
+% size(X_orig) %-> 5000 x 400
+
 X = [ones(m, 1) X];
 % size(X) %-> 5000 x 401
-z1 = Theta1 * X';
-% size(z1) %-> 25 x 5000
-a2 = sigmoid(z1);
+z2 = Theta1 * X';
+% size(z2) %-> 25 x 5000
+a2 = sigmoid(z2);
 % size(a2) % ->  25 x 5000
 m1 = size(a2, 2);
+
+a2_orig = a2;
+% size(a2_orig) % -> 25 x 5000
 
 a2 = [ones(1, m1); a2];
 % size(a2) % -> 26 x 5000
 
-z2 = Theta2 * a2; 
-% size(z2) % -> 10 x 5000
+z3 = Theta2 * a2; 
+% size(z3) % -> 10 x 5000
 
-h = sigmoid(z2);
+h = sigmoid(z3);
 % size(h) % -> 10 x 5000
 
 % size(y) % 5000 x 1
@@ -65,12 +71,11 @@ h = sigmoid(z2);
 % y_vec = zeros(num_labels, m);
 % size(y_vec) % 10 x 5000
 
-labels = (1:10)';
+labels = (1:num_labels)';
 y_vec = repmat(labels, [1, m]);
 % size(y_vec) % 10 x 5000
 y_vec = (y_vec == y');
 % size(y_vec) % 10 x 5000
-
 
  
 p = (log(h) .* y_vec .* (-1)) - ((1 - y_vec) .* log(1 - h));
@@ -96,7 +101,37 @@ J = ((1/m) * sum(s1));
 %               over the training examples if you are implementing it for the 
 %               first time.
 
+   % d3 = a3 - y_vec
+   d3 = h - y_vec;
+  
+   % size(d3) % 10x5000
+   % size(Theta2) %  -> 10 x 26
+   
+   %size(z2) % 10 x 5000;
 
+   t = (Theta2' * d3);
+   t(1,:) = []; % remove the row 1, corresponding to bias term.
+   % size(t) % 25 x 5000
+
+   d2 =  t .*  sigmoidGradient(z2);
+
+
+   % size(d3) % 10 x 5000
+   % size(d2) % 25 x 5000
+
+   %D2
+   D2  = d3 * a2'; 
+   % size(D2) % 10 x 26
+
+   % D1
+   D1 =  d2 * X;
+   % size(D1) % 25 x 401
+   Theta1_grad = D1/m;
+   Theta2_grad = D2/m;
+
+
+% size(Theta1) % -> 25 x 401
+% size(Theta2) %  -> 10 x 26
 
 %
 % Part 3: Implement regularization with the cost function and gradients.
