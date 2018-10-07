@@ -1,0 +1,82 @@
+ 
+ % You will have X, y, Xval, yval, Xtest, ytest in your environment
+
+ 
+ Given X and y
+
+ X       y
+ ---    ---
+
+ 1      11 
+ 2      12
+ 3      13
+ 4      14
+ ..     ---
+
+
+Do : X = [ones(m, 1) X]
+Get theta
+
+
+==========
+lambda = 0;
+function [theta] = trainLinearReg(X, y, lambda)
+% Initialize Theta
+initial_theta = zeros(size(X, 2), 1); 
+
+% Create "short hand" for the cost function to be minimized
+costFunction = @(t) linearRegCostFunction(X, y, t, lambda);
+
+% Now, costFunction is a function that takes in only one argument
+options = optimset('MaxIter', 200, 'GradObj', 'on');
+
+% Minimize using fmincg
+theta = fmincg(costFunction, initial_theta, options);
+
+end
+===========
+function [J, grad] = linearRegCostFunction(X, y, theta, lambda)
+% Initialize some useful values
+m = length(y); % number of training examples
+% You need to return the following variables correctly 
+J = 0;
+grad = zeros(size(theta));
+
+h =  theta' * X';
+
+% size(h)
+% size(y)
+D = h -y';
+
+
+theta_term = theta;
+
+theta_term(1,:) = 0;
+
+J = (1/(2*m)) * sum(D .^ 2) + (lambda/(2*m)) * sum(sum(theta_term .^ 2));
+
+grad = ((1/m) * sum(D' .* X))' + ((lambda/m) * theta_term);
+===========
+
+% Selected values of lambda
+lambda_vec = [0 0.001 0.003 0.01 0.03 0.1 0.3 1 3 10]';
+
+for i = 1:length(lambda_vec),
+   theta = trainLinearReg(X, y, lambda_vec(i));
+   [error_train(i), grad] = linearRegCostFunction(X, y, theta, 0);     (lamda 0)
+   [error_val(i), grad]   = linearRegCostFunction(Xval, yval, theta, 0);  (lamda 0)
+end 
+============
+
+%  implement validationCurve to test various values of 
+%  lambda on a validation set. use this to select the
+%  "best" lambda value.
+xlabel('lambda');
+ylabel('Error');
+=============
+
+Find out the  error with X_poly_test, ytest  (lamda = 0)
+theta = trainLinearReg(X_poly, y, 3);
+[error_train, grad] = linearRegCostFunction(X_poly_test, ytest, theta, 0)
+
+============
