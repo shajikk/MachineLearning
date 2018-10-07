@@ -15,6 +15,12 @@ X_poly = zeros(numel(X), p);
 %
 % 
 
+for i = 1:p,
+x_pow = zeros(size(X));
+x_pow = X .^ i;
+X_poly(:,i) = x_pow;
+end    
+
 
 
 
