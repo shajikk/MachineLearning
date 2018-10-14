@@ -23,6 +23,26 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+% t = [0.001 0.003 0.01 0.03 0.1 0.3 1 3 10 30];
+t = [0.1 1]; % to make submission faster for following solutions
+r = [];
+for i = 1:length(t),
+    for j = 1:length(t),
+        C = t(i);
+        sigma = t(j);
+        model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma)); 
+        predictions = svmPredict(model, Xval);
+        p = mean(double(predictions ~= yval));
+        r = [r; p C sigma];
+    end    
+end
+
+[v, i ] = min (r(:,1), [], 1);
+r
+% v
+% i
+C = r(i,:)(2)
+sigma = r(i,:)(3)
 
 
 
