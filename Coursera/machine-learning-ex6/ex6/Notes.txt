@@ -1,0 +1,14 @@
+Support Vector Machines (SVM) 
+
+model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma)); 
+predictions = svmPredict(model, Xval);
+
+
+
+p = mean(double(predictions ~= yval));
+    For classification, the error (p) is defined as the fraction of the 
+    cross validation examples that were classified incorrectly. 
+    In Octave/MATLAB, we can compute this error using :
+          mean(double(predictions ~= yval)), 
+    where predictions is a vector containing all the predictions from the SVM, 
+    and yval are the true labels from the cross validation set.
