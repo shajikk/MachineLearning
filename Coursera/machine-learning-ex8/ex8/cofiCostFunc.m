@@ -11,7 +11,8 @@ X = reshape(params(1:num_movies*num_features), num_movies, num_features);
 Theta = reshape(params(num_movies*num_features+1:end), ...
                 num_users, num_features);
 
-            
+  
+
 % You need to return the following values correctly
 J = 0;
 X_grad = zeros(size(X));
@@ -39,7 +40,37 @@ Theta_grad = zeros(size(Theta));
 %        Theta_grad - num_users x num_features matrix, containing the 
 %                     partial derivatives w.r.t. to each element of Theta
 %
+% size(X)
+% size(Theta) 
 
+h = X * Theta';
+
+J = sum(sum(((Y - h) .^ 2) .* R))/2;
+
+r = (lambda/2) * (sum(sum((Theta .^2))) + sum(sum((X .^2))));
+
+% The euqation given is for 'i' th movie.
+% j:r(i,j) = 1 => summation of all values of j (user) where r(i,j) = 1
+% We have to do it for all Movies.
+
+% 
+
+% h is the predicted stars.
+% (h - Y) is the  error in prediction. For all movies, that users 
+% have given star rating, it becomes :
+% (h - Y) .* R
+
+J = J + r;
+
+
+X_grad = ((h - Y) .* R) * Theta;
+
+X_grad = X_grad + lambda .* X;
+
+
+Theta_grad = ((h - Y) .* R)' * X;
+
+Theta_grad = Theta_grad + lambda * Theta;
 
 
 

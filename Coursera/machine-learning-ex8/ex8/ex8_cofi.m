@@ -33,14 +33,19 @@ load ('ex8_movies.mat');
 %  From the matrix, we can compute statistics like average rating.
 fprintf('Average rating for movie 1 (Toy Story): %f / 5\n\n', ...
         mean(Y(1, R(1, :))));
+fprintf('Average rating for movie 1 (Toy Story): %f / 5\n\n', ...
+        mean(Y(1, 
+              find(R(1,:)>0)
+            )));
 
 %  We can "visualize" the ratings matrix by plotting it with imagesc
-imagesc(Y);
-ylabel('Movies');
-xlabel('Users');
+% imagesc(Y);
+% ylabel('Movies');
+% xlabel('Users');
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
+% return
 
 %% ============ Part 2: Collaborative Filtering Cost Function ===========
 %  You will now implement the cost function for collaborative filtering.
@@ -65,9 +70,9 @@ J = cofiCostFunc([X(:) ; Theta(:)], Y, R, num_users, num_movies, ...
 fprintf(['Cost at loaded parameters: %f '...
          '\n(this value should be about 22.22)\n'], J);
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
+% return;
 
 %% ============== Part 3: Collaborative Filtering Gradient ==============
 %  Once your cost function matches up with ours, you should now implement 
@@ -80,7 +85,9 @@ fprintf('\nChecking Gradients (without regularization) ... \n');
 checkCostFunction;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+% pause;
+% return;
+
 
 
 %% ========= Part 4: Collaborative Filtering Cost Regularization ========
@@ -96,8 +103,9 @@ J = cofiCostFunc([X(:) ; Theta(:)], Y, R, num_users, num_movies, ...
 fprintf(['Cost at loaded parameters (lambda = 1.5): %f '...
          '\n(this value should be about 31.34)\n'], J);
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
+% return;
 
 
 %% ======= Part 5: Collaborative Filtering Gradient Regularization ======
@@ -111,8 +119,9 @@ fprintf('\nChecking Gradients (with regularization) ... \n');
 %  Check gradients by running checkNNGradients
 checkCostFunction(1.5);
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
+% return;
 
 
 %% ============== Part 6: Entering ratings for a new user ===============
@@ -128,7 +137,7 @@ my_ratings = zeros(1682, 1);
 
 % Check the file movie_idx.txt for id of each movie in our dataset
 % For example, Toy Story (1995) has ID 1, so to rate it "4", you can set
-my_ratings(1) = 4;
+my_ratings(1) = 1;
 
 % Or suppose did not enjoy Silence of the Lambs (1991), you can set
 my_ratings(98) = 2;
@@ -136,14 +145,14 @@ my_ratings(98) = 2;
 % We have selected a few movies we liked / did not like and the ratings we
 % gave are as follows:
 my_ratings(7) = 3;
-my_ratings(12)= 5;
-my_ratings(54) = 4;
-my_ratings(64)= 5;
-my_ratings(66)= 3;
+my_ratings(12)= 2;
+my_ratings(54) = 1;
+my_ratings(64)= 3;
+my_ratings(66)= 1;
 my_ratings(69) = 5;
-my_ratings(183) = 4;
-my_ratings(226) = 5;
-my_ratings(355)= 5;
+my_ratings(183) = 1;
+my_ratings(226) = 1;
+my_ratings(355)= 2;
 
 fprintf('\n\nNew user ratings:\n');
 for i = 1:length(my_ratings)
@@ -153,8 +162,10 @@ for i = 1:length(my_ratings)
     end
 end
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+% fprintf('\nProgram paused. Press enter to continue.\n');
+% pause;
+
+
 
 
 %% ================== Part 7: Learning Movie Ratings ====================
@@ -217,6 +228,7 @@ pause;
 
 p = X * Theta';
 my_predictions = p(:,1) + Ymean;
+my_predictions
 
 movieList = loadMovieList();
 

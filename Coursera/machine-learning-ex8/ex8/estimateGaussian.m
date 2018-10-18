@@ -10,6 +10,9 @@ function [mu sigma2] = estimateGaussian(X)
 % Useful variables
 [m, n] = size(X);
 
+
+
+
 % You should return these values correctly
 mu = zeros(n, 1);
 sigma2 = zeros(n, 1);
@@ -22,7 +25,10 @@ sigma2 = zeros(n, 1);
 %
 
 
+mu = mean(X)';
+sq = bsxfun(@minus, X, mean(X)) .^ 2;
 
+sigma2 = sum(sq, 1)/m;
 
 
 
