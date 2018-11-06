@@ -792,7 +792,7 @@ from IPython.display import Image
 Image("xZnMuPZ.jpg", width=700)
 
 
-# In[576]:
+# In[713]:
 
 
 # This shows age, weight and length together.
@@ -800,6 +800,9 @@ df.groupby("animal").mean()
 
 # Another grouping, shows age, weight and length
 df.groupby("type").mean()
+
+#How to view the statistics of groupby
+df.groupby("animal").describe()
 
 
 # In[578]:

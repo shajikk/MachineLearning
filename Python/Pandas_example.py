@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[236]:
+# In[2]:
 
 
 # Print all the interactive output without resorting to print, not only the last result
@@ -386,7 +386,7 @@ dframe[dframe>10]
 dframe.where(dframe>10)
 
 
-# In[344]:
+# In[3]:
 
 
 d = pd.DataFrame({'year':[2008,2008,2008,2008,2009,2009,2009,2009], 
