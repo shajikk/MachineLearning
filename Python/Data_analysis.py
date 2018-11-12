@@ -15,7 +15,7 @@ from pandas import Series, DataFrame
 
 # ### Aggeregation - agr and passing a function to it
 
-# In[12]:
+# In[3]:
 
 
 # https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/
@@ -74,7 +74,7 @@ dftame_red_wine['qual/alc ratio'] = dftame_red_wine['quality'] / dftame_red_wine
 dftame_red_wine.head()
 
 
-# In[23]:
+# In[5]:
 
 
 # Get exact same result as group by.

@@ -240,16 +240,10 @@ nfl_frame_copy1 = nfl_frame_copy.copy()
 del nfl_frame_copy1['Division']
 nfl_frame_copy1
 
-
-# In[193]:
-
-
 # Convert a dictionary to python
 d = {'Visa' : ['H1b', 'L1', 'F1', 'B2', 'O'], 'Type' : ['professional', 'transfer', 'Student', 'Visitor', 'Genius']}
 visa_frame = DataFrame(d)
 visa_frame
-
-
 # ### DataFrame to dictionary
 
 # In[197]:
